@@ -3,3 +3,25 @@ version: @version@
 main: com.github.mori01231.betatest.BetaTest
 description: Controls BetaTesters
 
+commands:
+  savetester:
+    description: Saves tester to list of testers.
+    permission: betatest.savetester
+    usage: Syntax error! Simply type /savetester to save tester to list of testers.
+  givetester:
+    description: Gives tester all required items.
+    permission: betatest.givetester
+    usage: Syntax error! Simply type /givetester to give tester all required items.
+
+permissions:
+  betatest.*:
+    description: Gives access to all BetaTest commands
+    children:
+      betatest.savetester: true
+      betates.givetester: true
+  betatest.savetester:
+    description: Allows you to save the tester to list of testers.
+    default: false
+  betatest.givetester:
+    description: Allows you to give the tester all required items..
+    default: false
