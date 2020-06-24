@@ -1,5 +1,5 @@
 name: BetaTest
 version: @version@
 main: com.github.mori01231.betatest.BetaTest
-api-version: 1.15.2
 description: Controls BetaTesters
+
