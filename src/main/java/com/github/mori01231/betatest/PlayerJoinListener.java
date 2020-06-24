@@ -1,29 +1,24 @@
 package com.github.mori01231.betatest;
 
-import com.github.mori01231.utils.ListStore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 import static org.bukkit.Bukkit.getLogger;
 
 public class PlayerJoinListener {
 
-    //private List<UUID> alreadyGavePlayers = new ArrayList<>();
+
     private BetaTest plugin;
     public PlayerJoinListener(BetaTest plugin){
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         boolean firstJoin = !player.hasPlayedBefore();

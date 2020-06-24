@@ -22,6 +22,7 @@ public final class BetaTest extends JavaPlugin {
 
         getLogger().info("BetaTest has been enabled.");
         this.getCommand("givetester").setExecutor(new GiveTester());
+        this.getCommand("savetester").setExecutor(new SaveTester(this));
 
         String pluginFolder = this.getDataFolder().getAbsolutePath();
         (new File(pluginFolder)).mkdirs();
