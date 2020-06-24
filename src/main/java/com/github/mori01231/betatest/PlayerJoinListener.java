@@ -5,7 +5,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class PlayerJoinListener {
+
+    private List<UUID> alreadyGavePlayers = new ArrayList<>();
+
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -16,6 +27,5 @@ public class PlayerJoinListener {
             //Add to list of beta testers
         }
     }
-
 
 }

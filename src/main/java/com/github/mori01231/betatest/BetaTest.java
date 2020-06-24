@@ -14,20 +14,18 @@ public final class BetaTest extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        getLogger().info("LifeCore has been enabled.");
-        this.getCommand("givetester").setExecutor(new GiveTester());
 
+        getLogger().info("BetaTest has been enabled.");
+        this.getCommand("givetester").setExecutor(new GiveTester());
 
         this.saveDefaultConfig();
 
     }
 
 
-
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
-        getLogger().info("LifeCore has been disabled.");
+
+        getLogger().info("BetaTest has been disabled.");
     }
 }
