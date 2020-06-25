@@ -1,6 +1,7 @@
 package com.github.mori01231.betatest;
 
 import com.github.mori01231.utils.ListStore;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -31,6 +32,8 @@ public final class BetaTest extends JavaPlugin {
 
         this.saveDefaultConfig();
 
+        registerEvents();
+
     }
 
 
@@ -38,5 +41,12 @@ public final class BetaTest extends JavaPlugin {
     public void onDisable() {
 
         getLogger().info("BetaTest has been disabled.");
+    }
+
+    public void registerEvents(){
+
+        PluginManager pm = getServer().getPluginManager();
+
+        pm.registerEvents(new PlayerJoinListener(this),  this);
     }
 }
