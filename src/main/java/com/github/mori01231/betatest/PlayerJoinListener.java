@@ -29,10 +29,13 @@ public class PlayerJoinListener implements Listener {
 
         Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "This player is on their first join: " + firstJoin + " UUID: " + uuid + " MODE: " + mode);
         if (mode.equalsIgnoreCase("save")){
+            if (!plugin.betatesters.contains(uuid)){
+                plugin.betatesters.add(uuid);
+                plugin.betatesters.save();
+            }
             getServer().dispatchCommand(getServer().getConsoleSender(), "savetester " + uuid);
-            Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Saving BetaTester");
-            plugin.betatesters.add(uuid);
-            plugin.betatesters.save();
+            //Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Saving BetaTester");
+
         }
 
         else if (mode.equalsIgnoreCase("give")){
