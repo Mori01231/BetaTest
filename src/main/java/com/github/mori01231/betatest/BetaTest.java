@@ -27,6 +27,7 @@ public final class BetaTest extends JavaPlugin {
 
         String pluginFolder = this.getDataFolder().getAbsolutePath();
         (new File(pluginFolder)).mkdirs();
+
         this.betatesters = new ListStore(new File(pluginFolder + File.separator + "beta-testers.txt"));
         this.betatesters.load();
 

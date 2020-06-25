@@ -9,8 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 
-import static org.bukkit.Bukkit.getLogger;
-
 public class PlayerJoinListener implements Listener {
 
 
@@ -19,12 +17,13 @@ public class PlayerJoinListener implements Listener {
         this.plugin = plugin;
     }
 
+    String mode = BetaTest.getInstance().getConfig().getString("Mode");
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         boolean firstJoin = !player.hasPlayedBefore();
-        getLogger().info("This player is on their first join: " + firstJoin);
-        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + player.getName() + ChatColor.DARK_GRAY + " has joined the game and you better know it." + "This player is on their first join: " + firstJoin);
+        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + player.getName() + ChatColor.DARK_GRAY + " has joined the game and you better know it.This player is on their first join: " + firstJoin);
 
         if(firstJoin){
             String uuid = String.valueOf(player.getUniqueId());

@@ -11,8 +11,6 @@ public class GiveTester implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-
-
         for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester")) {
             getServer().dispatchCommand(getServer().getConsoleSender(), "mm i give " + args[0] + " " + line);
         }
