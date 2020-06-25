@@ -25,25 +25,27 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         boolean firstJoin = !player.hasPlayedBefore();
-        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + player.getName() + ChatColor.DARK_GRAY + " has joined the game and you better know it.This player is on their first join: " + firstJoin);
+        String uuid = String.valueOf(player.getUniqueId());
 
-        if(firstJoin){
-            String uuid = String.valueOf(player.getUniqueId());
+        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "This player is on their first join: " + firstJoin + " UUID: " + uuid + " MODE: " + mode);
+        if (mode.equalsIgnoreCase("save")){
+            getServer().dispatchCommand(getServer().getConsoleSender(), "savetester " + uuid);
+            Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Saving BetaTester");
+            plugin.betatesters.add(uuid);
+            plugin.betatesters.save();
+        }
 
-            if (mode == "save"){
-                plugin.betatesters.add(uuid);
+        else if (mode.equalsIgnoreCase("give")){
+            if (plugin.betatesters.contains(uuid)){
+                getServer().dispatchCommand(getServer().getConsoleSender(), "givetester " + player.getName());
+                plugin.betatesters.remove(uuid);
                 plugin.betatesters.save();
             }
-
-            else if (mode == "give"){
-                if (plugin.betatesters.contains(uuid)){
-                    getServer().dispatchCommand(getServer().getConsoleSender(), "givetester " + player.getName());
-                    plugin.betatesters.remove(uuid);
-                    plugin.betatesters.save();
-                }
-            }
-
         }
+        /*if(firstJoin){
+
+
+        }*/
     }
 
 }
