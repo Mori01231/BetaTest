@@ -24,11 +24,10 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         boolean firstJoin = !player.hasPlayedBefore();
         getLogger().info("This player is on their first join: " + firstJoin);
-        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + player.getName() + ChatColor.DARK_GRAY + " has joined the game and you better know it.");
+        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + player.getName() + ChatColor.DARK_GRAY + " has joined the game and you better know it." + "This player is on their first join: " + firstJoin);
 
         if(firstJoin){
             String uuid = String.valueOf(player.getUniqueId());
-            getLogger().info("Setting string");
             plugin.betatesters.add(uuid);
             plugin.betatesters.add("String added");
             //Add to list of beta testers
