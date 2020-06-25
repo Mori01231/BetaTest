@@ -27,9 +27,18 @@ public class PlayerJoinListener implements Listener {
 
         if(firstJoin){
             String uuid = String.valueOf(player.getUniqueId());
-            plugin.betatesters.add(uuid);
-            plugin.betatesters.add("String added");
-            //Add to list of beta testers
+
+            if (mode == "save"){
+                plugin.betatesters.add(uuid);
+            }
+
+            else if (mode == "give"){
+                if (plugin.betatesters.contains(uuid)){
+                    plugin.betatesters.remove(uuid);
+                    plugin.betatesters.save();
+                }
+            }
+
         }
     }
 

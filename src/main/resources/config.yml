@@ -3,3 +3,5 @@
 GiveTester: #write mythicmobs item and how many of it you want to give to tester.
   - 'beta_ticket 3'
   - 'beta_power 1'
+
+Mode: 'save'
