@@ -32,17 +32,28 @@ public class PlayerJoinListener implements Listener {
             if (!plugin.betatesters.contains(uuid)){
                 plugin.betatesters.add(uuid);
                 plugin.betatesters.save();
+                //Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Saving BetaTester");
             }
-            getServer().dispatchCommand(getServer().getConsoleSender(), "savetester " + uuid);
-            //Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Saving BetaTester");
+
+
 
         }
 
         else if (mode.equalsIgnoreCase("give")){
             if (plugin.betatesters.contains(uuid)){
-                getServer().dispatchCommand(getServer().getConsoleSender(), "givetester " + player.getName());
+                //give mythicmobs items
+                for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MM")) {
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "mm i give " + player.getName() + " " + line);
+                }
+
+                //give minecraft items
+                for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MC")) {
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "minecraft:give " + player.getName() + " " + line);
+                }
+
                 plugin.betatesters.remove(uuid);
                 plugin.betatesters.save();
+                //Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Saving BetaTester");
             }
         }
         /*if(firstJoin){
