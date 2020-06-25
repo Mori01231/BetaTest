@@ -4,4 +4,7 @@ GiveTester: #write mythicmobs item and how many of it you want to give to tester
   - 'beta_ticket 3'
   - 'beta_power 1'
 
+#Mode options:
+#'save' to save beta testers to list
+#'give' to give pre-recorded beta testers items.
 Mode: 'save'
