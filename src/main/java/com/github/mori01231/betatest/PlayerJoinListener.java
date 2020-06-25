@@ -8,6 +8,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import static org.bukkit.Bukkit.getServer;
+
 
 public class PlayerJoinListener implements Listener {
 
@@ -30,10 +32,12 @@ public class PlayerJoinListener implements Listener {
 
             if (mode == "save"){
                 plugin.betatesters.add(uuid);
+                plugin.betatesters.save();
             }
 
             else if (mode == "give"){
                 if (plugin.betatesters.contains(uuid)){
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "givetester " + player.getName());
                     plugin.betatesters.remove(uuid);
                     plugin.betatesters.save();
                 }
