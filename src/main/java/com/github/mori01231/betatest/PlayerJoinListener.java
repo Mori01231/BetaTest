@@ -49,6 +49,7 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
+        /*
         //give mode
         else if (mode.equalsIgnoreCase("give")){
 
@@ -74,6 +75,11 @@ public class PlayerJoinListener implements Listener {
             else{
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典は配布済みです。" ));
             }
+        }
+*/
+
+        else{
+            getLogger().info("Invalid mode");
         }
 
     }
