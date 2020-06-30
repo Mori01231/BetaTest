@@ -77,8 +77,10 @@ public class PlayerJoinListener implements Listener {
                 getLogger().info("Removed beta tester " + mcid + " from list.");
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を配布しました。" ));
             }
-            else{
+            else if(plugin.GivenBetaTesters.Contains(uuid)){
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典は配布済みです。" ));
+            }else{
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lあなたはベータテスターではありません。" ));
             }
         }
 
