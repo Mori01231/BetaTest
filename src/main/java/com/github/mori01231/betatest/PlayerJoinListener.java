@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import static org.bukkit.Bukkit.getLogger;
 import static org.bukkit.Bukkit.getServer;
@@ -29,6 +31,25 @@ public class PlayerJoinListener implements Listener {
 
     int RequiredSlotsNumber;
 
+    public int AvailableSlots(Player player){
+        //get player inventory.
+        Inventory inv = player.getInventory();
+
+        //initializing counter for slots.
+        int slots = 0;
+
+        //counting the number of available slots.
+        for (ItemStack item: inv.getContents()) {
+            if(item == null) {
+                slots++;
+            }
+        }
+
+        getLogger().info(String.valueOf(slots));
+
+        //return the number of available slots.
+        return slots;
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -73,7 +94,7 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&l設定ファイルのRequiredSlotsの値が大きすぎます。鯖主に報告してください。" ));
             }
 
-            else if(GetSlots.AvailableSlots(player) < RequiredSlotsNumber){
+            else if(AvailableSlots(player) < RequiredSlotsNumber){
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を受け取るにはインベントリに &b&l" + RequiredSlots + " &3&lスロット以上の空きを作ったうえで再度ログインしてください。" ));
             }
 
@@ -84,7 +105,7 @@ public class PlayerJoinListener implements Listener {
                 else if(plugin.GivenBetaTesters.Contains(uuid)){
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典は配布済みです。" ));
                 }
-                else{
+                else if(plugin.RecordedBetaTesters.Contains(uuid)){
                     //Logging how the beta tester was given the items.
                     getLogger().info("Giving tester " + mcid + " beta tester items using PlayerJoinListener.");
 

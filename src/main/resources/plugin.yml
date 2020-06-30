@@ -7,20 +7,28 @@ commands:
   savetester:
     description: Saves tester to list of testers.
     permission: betatest.savetester
-    usage: Syntax error! Simply type /savetester to save tester to list of testers.
+    usage: Syntax error! Simply type /savetester MCID to save tester to list of testers.
+  deletetester:
+    description: Seletes tester from list of testers.
+    permission: betatest.deletetester
+    usage: Syntax error! Simply type /savetester MCID to delete tester from list of testers.
   givetester:
     description: Gives tester all required items.
     permission: betatest.givetester
-    usage: Syntax error! Simply type /givetester to give tester all required items.
+    usage: Syntax error! Simply type /givetester MCID to give tester all required items.
 
 permissions:
   betatest.*:
     description: Gives access to all BetaTest commands
     children:
       betatest.savetester: true
+      betates.deletetester: true
       betates.givetester: true
   betatest.savetester:
     description: Allows you to save the tester to list of testers.
+    default: false
+  betatest.deletetester:
+    description: Allows you to delete the tester from list of testers.
     default: false
   betatest.givetester:
     description: Allows you to give the tester all required items..

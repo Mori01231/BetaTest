@@ -28,7 +28,8 @@ public class GiveTester implements CommandExecutor {
         String uuid;
         try{
             uuid = String.valueOf(player.getUniqueId());
-        }catch(NullPointerException n){
+        } catch (NullPointerException n){
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&lUUIDが取得できませんでした"));
             return false;
         }
 
@@ -36,17 +37,18 @@ public class GiveTester implements CommandExecutor {
 
         String RequiredSlots = BetaTest.getInstance().getConfig().getString("RequiredSlots");
 
-        int RequiredSlotsNumber;
+        int RequiredSlotsNumber = 100;
 
 
+        if(RequiredSlots == null){
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l最大スロット数が設定されていません。"));
+            return false;
+        }
         try {
             RequiredSlotsNumber = Integer.parseInt(RequiredSlots);
         } catch (NumberFormatException e) {
             RequiredSlotsNumber = 100;
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l最大スロット数が数値になっていません。"));
-        }catch (NullPointerException n) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l最大スロット数が設定されていません。"));
-            return false;
         }
 
         getLogger().info("Using GiveTester command on " + mcid);
