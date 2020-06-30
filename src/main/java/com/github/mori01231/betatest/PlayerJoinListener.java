@@ -33,7 +33,8 @@ public class PlayerJoinListener implements Listener {
         //Store mcid of player
         String mcid = String.valueOf(player.getName());
 
-        //save mode
+        /*
+        //save mode (removed for now)
         if (mode.equalsIgnoreCase("save")){
 
             //Not saved as beta tester yet
@@ -48,10 +49,10 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスターとして登録済みです。" ));
             }
         }
+        */
 
-        /*
         //give mode
-        else if (mode.equalsIgnoreCase("give")){
+        if (mode.equalsIgnoreCase("give")){
 
             //Not given beta tester items yet
             if (plugin.betatesters.contains(uuid)){
@@ -76,7 +77,7 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典は配布済みです。" ));
             }
         }
-*/
+
 
         else{
             getLogger().info("Invalid mode");
