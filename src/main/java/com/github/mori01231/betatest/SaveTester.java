@@ -33,9 +33,9 @@ public class SaveTester implements CommandExecutor {
 
 
         //Not saved as beta tester yet
-        if (!plugin.betatesters.contains(uuid)){
-            plugin.betatesters.add(uuid);
-            plugin.betatesters.save();
+        if (!plugin.RecordedBetaTesters.Contains(uuid)){
+            plugin.RecordedBetaTesters.Add(uuid);
+            plugin.RecordedBetaTesters.Save();
             getLogger().info("Added beta tester " + mcid + " to list.");
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスターとして登録されました。" ));
         }

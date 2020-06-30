@@ -1,13 +1,18 @@
 #BetaTest config file
 
-GiveTester:
-  MM: #write mythicmobs item and how many of it you want to give to tester. Use /mm i give command syntax.
-    - 'beta_ticket 3'
-    - 'beta_power 1'
-  MC: #write minecraft item and how many of it you want to give to tester. Use /minecraft:give command syntax.
-    - 'diamond 10'
-
 #Mode options:
 #'save' to save beta testers to list
 #'give' to give pre-recorded beta testers items.
 Mode: 'save'
+
+#Number of open slots required to receive all beta tester items.
+RequiredSlots: '3'
+
+#Items to give to the tester
+GiveTester:
+  MM: #write MythicMobs item and how many of it you want to give to tester. Use /mm i give command syntax.
+    - 'beta_ticket 3'
+    - 'beta_power 1'
+  MC: #write Minecraft item and how many of it you want to give to tester. Use /minecraft:give command syntax.
+    - 'diamond 10'
+

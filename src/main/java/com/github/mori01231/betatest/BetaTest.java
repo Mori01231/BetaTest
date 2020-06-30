@@ -35,6 +35,7 @@ public final class BetaTest extends JavaPlugin {
         this.GivenBetaTesters = new ListStore(new File(pluginFolder + File.separator + "given-beta-testers.txt"));
         this.GivenBetaTesters.Load();
 
+
         this.saveDefaultConfig();
 
         registerEvents();
