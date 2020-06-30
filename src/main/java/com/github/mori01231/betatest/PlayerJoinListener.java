@@ -31,9 +31,9 @@ public class PlayerJoinListener implements Listener {
         String uuid = String.valueOf(player.getUniqueId());
 
         //Store mcid of player
-        String mcid = String.valueOf(player.getName());
+        String mcid = player.getName();
 
-        /*
+
         //save mode (removed for now)
         if (mode.equalsIgnoreCase("save")){
 
@@ -49,11 +49,12 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスターとして登録済みです。" ));
             }
         }
-        */
+
 
         //give mode
         if (mode.equalsIgnoreCase("give")){
 
+            getLogger().info("Giving tester " + mcid + " beta tester items using PlayerJoinListener.");
             //Not given beta tester items yet
             if (plugin.betatesters.contains(uuid)){
                 //give mythicmobs items

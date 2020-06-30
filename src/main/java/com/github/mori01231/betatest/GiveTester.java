@@ -16,8 +16,6 @@ public class GiveTester implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        getLogger().info("Using GiveTester command.");
-
         //Store mcid of player
         String mcid = String.valueOf(args[0]);
 
@@ -25,6 +23,10 @@ public class GiveTester implements CommandExecutor {
 
         //Store uuid of player
         String uuid = String.valueOf(player.getUniqueId());
+
+        getLogger().info("Using GiveTester command on " + mcid);
+
+
 
         if (plugin.betatesters.contains(uuid)){
             //give mythicmobs items
