@@ -21,7 +21,7 @@ public class ListStore {
         }
     }
 
-    public void load(){
+    public void Load(){
         try {
             DataInputStream input = new DataInputStream(new FileInputStream(this.storageFile));
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -29,7 +29,7 @@ public class ListStore {
             String line;
 
             while ((line = reader.readLine()) != null){
-                if (this.contains(line) == false){
+                if (this.Contains(line) == false){
                     this.values.add(line);
                 }
             }
@@ -41,7 +41,7 @@ public class ListStore {
         }
     }
 
-    public void save(){
+    public void Save(){
         try {
             FileWriter stream = new FileWriter(this.storageFile);
             BufferedWriter out = new BufferedWriter(stream);
@@ -58,17 +58,17 @@ public class ListStore {
         }
     }
 
-    public boolean contains(String value){
+    public boolean Contains(String value){
         return this.values.contains(value);
     }
 
-    public void add(String value){
-        if(this.contains(value) == false){
+    public void Add(String value){
+        if(this.Contains(value) == false){
             this.values.add(value);
         }
     }
 
-    public void remove(String value){
+    public void Remove(String value){
         this.values.remove(value);
     }
 

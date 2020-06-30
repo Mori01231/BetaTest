@@ -38,9 +38,9 @@ public class PlayerJoinListener implements Listener {
         if (mode.equalsIgnoreCase("save")){
 
             //Not saved as beta tester yet
-            if (!plugin.betatesters.contains(uuid)){
-                plugin.betatesters.add(uuid);
-                plugin.betatesters.save();
+            if (!plugin.RecordedBetaTesters.Contains(uuid)){
+                plugin.RecordedBetaTesters.Add(uuid);
+                plugin.RecordedBetaTesters.Save();
                 getLogger().info("Added beta tester " + mcid + " to list.");
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスターとして登録されました。" ));
             }
@@ -56,7 +56,7 @@ public class PlayerJoinListener implements Listener {
 
             getLogger().info("Giving tester " + mcid + " beta tester items using PlayerJoinListener.");
             //Not given beta tester items yet
-            if (plugin.betatesters.contains(uuid)){
+            if (plugin.RecordedBetaTesters.Contains(uuid)){
                 //give mythicmobs items
                 for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MM")) {
                     getServer().dispatchCommand(getServer().getConsoleSender(), "mm i give " + player.getName() + " " + line);
@@ -69,8 +69,11 @@ public class PlayerJoinListener implements Listener {
                     getLogger().info("Gave beta tester " + mcid + " minecraft item " + line);
                 }
 
-                plugin.betatesters.remove(uuid);
-                plugin.betatesters.save();
+                plugin.RecordedBetaTesters.Remove(uuid);
+                plugin.RecordedBetaTesters.Save();
+
+                plugin.GivenBetaTesters.Add(uuid);
+                plugin.GivenBetaTesters.Save();
                 getLogger().info("Removed beta tester " + mcid + " from list.");
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を配布しました。" ));
             }

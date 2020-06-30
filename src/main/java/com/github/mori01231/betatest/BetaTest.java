@@ -1,6 +1,5 @@
 package com.github.mori01231.betatest;
 
-import com.github.mori01231.utils.GivenListStore;
 import com.github.mori01231.utils.ListStore;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,8 +8,8 @@ import java.io.File;
 
 public final class BetaTest extends JavaPlugin {
 
-    public ListStore betatesters;
-    public GivenListStore GivenBetaTesters;
+    public ListStore RecordedBetaTesters;
+    public ListStore GivenBetaTesters;
 
     private static BetaTest instance;
     public BetaTest (){
@@ -30,11 +29,11 @@ public final class BetaTest extends JavaPlugin {
         String pluginFolder = this.getDataFolder().getAbsolutePath();
         (new File(pluginFolder)).mkdirs();
 
-        this.betatesters = new ListStore(new File(pluginFolder + File.separator + "beta-testers.txt"));
-        this.betatesters.load();
+        this.RecordedBetaTesters = new ListStore(new File(pluginFolder + File.separator + "beta-testers.txt"));
+        this.RecordedBetaTesters.Load();
 
-        this.GivenBetaTesters = new GivenListStore(new File(pluginFolder + File.separator + "given-beta-testers.txt"));
-        this.GivenBetaTesters.loadGivenList();
+        this.GivenBetaTesters = new ListStore(new File(pluginFolder + File.separator + "given-beta-testers.txt"));
+        this.GivenBetaTesters.Load();
 
         this.saveDefaultConfig();
 
