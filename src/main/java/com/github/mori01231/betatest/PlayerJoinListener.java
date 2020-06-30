@@ -63,6 +63,7 @@ public class PlayerJoinListener implements Listener {
 
         try {
             RequiredSlotsNumber = Integer.parseInt(RequiredSlots);
+            RequiredSlotsNumber += 5;
         }
         catch (NumberFormatException e)
         {
@@ -95,7 +96,7 @@ public class PlayerJoinListener implements Listener {
             }
 
             else if(AvailableSlots(player) < RequiredSlotsNumber){
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を受け取るにはインベントリに &b&l" + RequiredSlots + " &3&lスロット以上の空きを作ったうえで再度ログインしてください。" ));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を受け取るにはインベントリに &b&l" + RequiredSlotsNumber + " &3&lスロット以上の空きを作ったうえで再度ログインしてください。" ));
             }
 
             else{
