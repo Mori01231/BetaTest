@@ -3,6 +3,7 @@ package com.github.mori01231.betatest;
 import com.github.mori01231.utils.GetOpenInventorySlots;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -45,6 +46,16 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
+        if(player.getInventory().getItemInOffHand().getType() == Material.AIR){
+            slots--;
+        }
+
+        for (ItemStack item: player.getInventory().getArmorContents()){
+            if(item == null) {
+                slots--;
+            }
+        }
+
         getLogger().info(String.valueOf(slots));
 
         //return the number of available slots.
@@ -63,7 +74,6 @@ public class PlayerJoinListener implements Listener {
 
         try {
             RequiredSlotsNumber = Integer.parseInt(RequiredSlots);
-            RequiredSlotsNumber += 5;
         }
         catch (NumberFormatException e)
         {
@@ -95,9 +105,7 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&l設定ファイルのRequiredSlotsの値が大きすぎます。鯖主に報告してください。" ));
             }
 
-            else if(AvailableSlots(player) < RequiredSlotsNumber){
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を受け取るにはインベントリに &b&l" + RequiredSlotsNumber + " &3&lスロット以上の空きを作ったうえで再度ログインしてください。" ));
-            }
+
 
             else{
                 if(!plugin.GivenBetaTesters.Contains(uuid) && !plugin.RecordedBetaTesters.Contains(uuid)){
@@ -107,28 +115,35 @@ public class PlayerJoinListener implements Listener {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典は配布済みです。" ));
                 }
                 else if(plugin.RecordedBetaTesters.Contains(uuid)){
-                    //Logging how the beta tester was given the items.
-                    getLogger().info("Giving tester " + mcid + " beta tester items using PlayerJoinListener.");
 
-                    //give MythicMobs items
-                    for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MM")) {
-                        getServer().dispatchCommand(getServer().getConsoleSender(), "mm i give " + player.getName() + " " + line);
-                        getLogger().info("Gave beta tester " + mcid + " mythicmobs item " + line);
+                    if(AvailableSlots(player) < RequiredSlotsNumber){
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&c&lベータテスター特典を受け取るにはインベントリに&b&l" + RequiredSlotsNumber + "&c&lスロット以上の空きを作ったうえで再度ログインしてください。" ));
+                    }
+                    else{
+                        //Logging how the beta tester was given the items.
+                        getLogger().info("Giving tester " + mcid + " beta tester items using PlayerJoinListener.");
+
+                        //give MythicMobs items
+                        for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MM")) {
+                            getServer().dispatchCommand(getServer().getConsoleSender(), "mm i give " + player.getName() + " " + line);
+                            getLogger().info("Gave beta tester " + mcid + " mythicmobs item " + line);
+                        }
+
+                        //give Minecraft items
+                        for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MC")) {
+                            getServer().dispatchCommand(getServer().getConsoleSender(), "minecraft:give " + player.getName() + " " + line);
+                            getLogger().info("Gave beta tester " + mcid + " minecraft item " + line);
+                        }
+
+                        plugin.RecordedBetaTesters.Remove(uuid);
+                        plugin.RecordedBetaTesters.Save();
+
+                        plugin.GivenBetaTesters.Add(uuid);
+                        plugin.GivenBetaTesters.Save();
+                        getLogger().info("Removed beta tester " + mcid + " from list.");
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を配布しました。" ));
                     }
 
-                    //give Minecraft items
-                    for (String line : BetaTest.getInstance().getConfig().getStringList("GiveTester.MC")) {
-                        getServer().dispatchCommand(getServer().getConsoleSender(), "minecraft:give " + player.getName() + " " + line);
-                        getLogger().info("Gave beta tester " + mcid + " minecraft item " + line);
-                    }
-
-                    plugin.RecordedBetaTesters.Remove(uuid);
-                    plugin.RecordedBetaTesters.Save();
-
-                    plugin.GivenBetaTesters.Add(uuid);
-                    plugin.GivenBetaTesters.Save();
-                    getLogger().info("Removed beta tester " + mcid + " from list.");
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b&lベータテスター特典を配布しました。" ));
                 }
             }
         }

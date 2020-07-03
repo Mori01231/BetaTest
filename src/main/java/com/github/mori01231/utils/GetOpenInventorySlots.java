@@ -1,5 +1,6 @@
 package com.github.mori01231.utils;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -17,6 +18,16 @@ public class GetOpenInventorySlots {
         for (ItemStack item: inv.getContents()) {
             if(item == null) {
                 slots++;
+            }
+        }
+
+        if(player.getInventory().getItemInOffHand().getType() == Material.AIR){
+            slots--;
+        }
+
+        for (ItemStack item: player.getInventory().getArmorContents()){
+            if(item == null) {
+                slots--;
             }
         }
 
